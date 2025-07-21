@@ -1,19 +1,20 @@
 # agenda-contactos
 
-## Project setup
+## Nombre(s) de integrante(s):
+- Omar Callejas Gutierrez
+
+## Pasos para iniciar el proyecto, dentro del proyecto ejecutar los siguientes comandos en la terminal
+
+## Instalacion de paquetes npm
+
+1.- npm install
 ```
-npm install
+## Run proyecto
+
+2.- npm run serve
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Abrir otra terminal para ejecutar Json Server
 
-### Compiles and minifies for production
+3.- npm run json:server
 ```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
