@@ -86,7 +86,7 @@
     </div>
     </div>
     </div>  
-  <!-- </div> -->
+  
 </template>
 
 <script>
@@ -116,8 +116,35 @@ export default {
           phone: '+591 76543210',
           country: 'Bolivia',
           city: 'Santa Cruz'
-        }
-        // Puedes agregar más contactos aquí
+        },
+        {
+          id: 3,
+          name: "Alice Johnson",
+          email: "alice.johnson@example.com",
+          address: "123 Maple Street",
+          phone: "123-456-7890",
+          country: "USA",
+          city: "New York"
+          },
+          {
+          id: 4,
+          name: "Bob Smith",
+          email: "bob.smith@example.com",
+          address: "456 Oak Avenue",
+          phone: "987-654-3210",
+          country: "Canada",
+          city: "Toronto"
+          },
+          {
+          id: 5,
+          name: "Carol White",
+          email: "carol.white@example.com",
+
+          address: "789 Pine Road",
+          phone: "555-123-4567",
+          country: "UK",
+          city: "London"
+          }       
       ],
 
       newContact: {
@@ -154,8 +181,7 @@ export default {
       console.log('Eliminar contacto con ID:', id);
       this.contacts = this.contacts.filter(contact => contact.id !== id);
     },
-    addContact() {
-      // Validación sencilla: campos requeridos
+    addContact() {      
       if (
         !this.newContact.name.trim() ||
         !this.newContact.email.trim() ||
@@ -173,8 +199,7 @@ export default {
         id: lastId + 1,
         ...this.newContact,
       };
-      this.contacts.push(contactToAdd);
-      // Limpiar inputs
+      this.contacts.push(contactToAdd);      
       this.newContact = {
         name: "",
         email: "",
@@ -200,7 +225,6 @@ export default {
 </script>
 
 <style scoped>
-/* MODAL */
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -233,7 +257,6 @@ export default {
   box-sizing: border-box;
 }
 
-/* BOTONES */
 .btn {
   padding: 0.45rem 0.9rem;
   border: none;
@@ -298,7 +321,7 @@ export default {
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-/* CONTENEDOR Y TABLA */
+
 .table-container {
   margin: 0px;
   

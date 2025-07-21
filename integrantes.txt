@@ -1,0 +1,8 @@
+Practica1 Vue3
+
+Nombre(s) de integrante(s):
+- Omar Callejas Gutierrez
+
+Pasos para iniciar el proyecto
+1) npm install
+2) npm run serve
