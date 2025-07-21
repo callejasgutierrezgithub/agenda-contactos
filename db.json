@@ -1,0 +1,49 @@
+{
+  "contacts": [
+    {
+      "id": "1",
+      "name": "Juan Pérez2",
+      "email": "juan@example.com2",
+      "address": "Av. Siempre Viva 1232",
+      "phone": "+591 712345672",
+      "country": "Bolivia2",
+      "city": "La Paz2"
+    },
+    {
+      "id": "2",
+      "name": "María Gómez",
+      "email": "maria@example.com",
+      "address": "Calle Falsa 456",
+      "phone": "+591 76543210",
+      "country": "Bolivia",
+      "city": "Santa Cruz"
+    },
+    {
+      "id": "3",
+      "name": "Alice Johnson",
+      "email": "alice.johnson@example.com",
+      "address": "123 Maple Street",
+      "phone": "123-456-7890",
+      "country": "USA",
+      "city": "New York"
+    },
+    {
+      "id": "4",
+      "name": "Bob Smith",
+      "email": "bob.smith@example.com",
+      "address": "456 Oak Avenue",
+      "phone": "987-654-3210",
+      "country": "Canada",
+      "city": "Toronto"
+    },
+    {
+      "id": "5",
+      "name": "Carol White",
+      "email": "carol.white@example.com",
+      "address": "789 Pine Road",
+      "phone": "555-123-4567",
+      "country": "UK",
+      "city": "London City"
+    }
+  ]
+}

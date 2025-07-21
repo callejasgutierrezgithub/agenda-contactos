@@ -98,54 +98,7 @@ export default {
       selectedContact: null,
       showEditModal: false,
       searchQuery: '',
-      contacts: [
-        {
-          id: 1,
-          name: 'Juan Pérez',
-          email: 'juan@example.com',
-          address: 'Av. Siempre Viva 123',
-          phone: '+591 71234567',
-          country: 'Bolivia',
-          city: 'La Paz'
-        },
-        {
-          id: 2,
-          name: 'María Gómez',
-          email: 'maria@example.com',
-          address: 'Calle Falsa 456',
-          phone: '+591 76543210',
-          country: 'Bolivia',
-          city: 'Santa Cruz'
-        },
-        {
-          id: 3,
-          name: "Alice Johnson",
-          email: "alice.johnson@example.com",
-          address: "123 Maple Street",
-          phone: "123-456-7890",
-          country: "USA",
-          city: "New York"
-          },
-          {
-          id: 4,
-          name: "Bob Smith",
-          email: "bob.smith@example.com",
-          address: "456 Oak Avenue",
-          phone: "987-654-3210",
-          country: "Canada",
-          city: "Toronto"
-          },
-          {
-          id: 5,
-          name: "Carol White",
-          email: "carol.white@example.com",
-
-          address: "789 Pine Road",
-          phone: "555-123-4567",
-          country: "UK",
-          city: "London"
-          }       
-      ],
+      contacts: [],
 
       newContact: {
         name: "",
@@ -157,6 +110,15 @@ export default {
       },
     };
   },
+
+  mounted() {
+    fetch('http://localhost:3000/contacts')
+      .then(res => res.json())
+      .then(data => {
+        this.contacts = data;
+      });
+  },
+
 
   computed: {
     filteredContacts() {
@@ -177,49 +139,72 @@ export default {
       this.selectedContact = { ...contact }; // clonar para no modificar directamente
       this.showEditModal = true;
     },
+
     deleteContact(id) {
-      console.log('Eliminar contacto con ID:', id);
-      this.contacts = this.contacts.filter(contact => contact.id !== id);
+      fetch(`http://localhost:3000/contacts/${id}`, {
+        method: 'DELETE'
+      })
+        .then(res => {
+          if (res.ok) {
+            this.contacts = this.contacts.filter(contact => contact.id !== id);            
+          } else {
+            console.error('Error al eliminar contacto');
+          }
+        })
+        .catch(error => {
+          console.error('Error al eliminar:', error);
+        });
     },
-    addContact() {      
-      if (
-        !this.newContact.name.trim() ||
-        !this.newContact.email.trim() ||
-        !this.newContact.phone.trim()
-      ) {
-        alert("Por favor, completa al menos Nombre, Email y Teléfono.");
-        return;
-      }
-      // Nuevo id: +1 del último
-      const lastId =
-        this.contacts.length > 0
-          ? this.contacts[this.contacts.length - 1].id
-          : 0;
+
+    addContact() {
       const contactToAdd = {
-        id: lastId + 1,
         ...this.newContact,
       };
-      this.contacts.push(contactToAdd);      
-      this.newContact = {
-        name: "",
-        email: "",
-        address: "",
-        phone: "",
-        country: "",
-        city: "",
-      };
+
+      fetch('http://localhost:3000/contacts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactToAdd)
+      })
+        .then(res => res.json())
+        .then(saved => {
+          this.contacts.push(saved);
+          this.newContact = {
+            name: "", email: "", address: "", phone: "", country: "", city: ""
+          };
+        });
     },
+
     closeModal() {
       this.showEditModal = false;
       this.selectedContact = null;
     },
     saveEdit() {
-      const index = this.contacts.findIndex(c => c.id === this.selectedContact.id);
-      if (index !== -1) {
-        this.contacts.splice(index, 1, { ...this.selectedContact });
-      }
-      this.closeModal();
-    },
+      const id = this.selectedContact.id;
+
+      fetch(`http://localhost:3000/contacts/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.selectedContact)
+      })
+        .then(res => {
+          if (res.ok) {
+          
+            const index = this.contacts.findIndex(c => c.id === id);
+            if (index !== -1) {
+              this.contacts.splice(index, 1, { ...this.selectedContact });
+            }
+            this.closeModal();
+            console.log(`Contacto con ID ${id} actualizado.`);
+          } else {
+            console.error('Error al actualizar contacto');
+          }
+        })
+        .catch(error => {
+          console.error('Error de red al actualizar contacto:', error);
+        });
+    }
+
   }
 };
 </script>
